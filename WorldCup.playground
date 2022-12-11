@@ -1,0 +1,242 @@
+/* 1.- Calcular y generar una lista con los 100 primeros números primos y hacer un print de los últimos 10. */
+print("Exercise 1")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 1 */
+
+var list: [Int] = []
+var prime = true
+var n = 1
+
+while list.count < 100 {
+    isPrime(n: n)
+    n += 1
+}
+
+func isPrime(n: Int) {
+    for num in stride(from: n, to: 1, by: -1) {
+        if  n % num == 0 && n != num && prime {
+            prime = false
+        }
+    }
+    if n != 0 && n != 1 && prime {
+        list.append(n)
+    }
+    prime = true
+}
+
+print(list.suffix(10))
+
+/* 2.- Calcular la suma de los primeros 50 números primos y hacer un print del resultado. */
+print("")
+print("Exercise 2")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 2 */
+
+let firstNumbers = list[...50]
+print(firstNumbers.reduce(0, { x, y in
+    x + y
+}))
+
+/* 3.- Dada la siguiente lista, obtener todos los elementos que contengan más de dos vocales: */
+print("")
+print("Exercise 3")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 3 */
+
+let players: [String] = ["Vinicius", "Messi", "Ronaldo", "Pedri", "Mbappe", "Modric", "Militao", "Morata", "Valverde", "Benzema", "Piqué"]
+var selectPlayers: [String] = []
+
+players.map { player in
+    var counter = 0
+    for c in player.lowercased() {
+        if c == "a" || c == "e" || c == "i" || c == "o" || c == "u" {
+            counter += 1
+        }
+    }
+    if counter > 2 {
+        selectPlayers.append(player)
+    }
+}
+
+print(selectPlayers)
+
+/* 4.- Crear un enumerado que permita indicar la posición en el campo de un jugador de fútbol, por ejemplo: Portero, Lateral Derecho, Central, Lateral Izquierdo, Mediocentro, Extremo Derecha, Extremo Izquierda, Delantero, etc */
+print("")
+print("Exercise 4")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 4 */
+
+enum playerPosition {
+    case portero
+    case lateralDerecho
+    case central
+    case lateralIzquierdo
+    case mediocentro
+    case extremoDerecho
+    case extremoIzquierdo
+    case delantero
+}
+
+let messi = playerPosition.delantero
+print(messi)
+
+/* 5.- Crear una clase, con los atributos necesarios, para representar a los miembros que participan en una selección del mundial y un enumerado que los diferencie por tipo, por ejemplo: Jugador, Seleccionador, Médico, etc. */
+print("")
+print("Exercise 5")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 5 */
+
+enum memberType {
+    case jugador
+    case seleccionador
+    case medico
+    case fisio
+}
+
+class memberWorldCup {
+    var country = ""
+    var club = ""
+    var memberType: memberType
+    
+    init(country: String, club: String, memberType: memberType) {
+        self.country = country
+        self.club = club
+        self.memberType = memberType
+    }
+}
+
+let cristiano = memberWorldCup(country: "Portugal", club: "Al Nassr", memberType: .jugador)
+print("El \(cristiano.memberType) que forma parte del \(cristiano.club) estará en el mundial con \(cristiano.country)")
+
+/* 6.- Crear las clases necesarias, con los atributos mínimos, para representar las selecciones de fútbol del Mundial de fútbol 2022, por ejemplo: Una clase que represente el Mundial, necesitaremos que contenga un listado de Selecciones, cada selección tendrá sus atributos, como nombre, país, jugadores, seleccionador, etc. */
+print("")
+print("Exercise 6")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 6 */
+
+class worldCup {
+    var country: String
+    var players: [String]
+    var coach: String
+    let teams = ["Qatar", "Ecuador", "Senegal", "Países Bajos", "Inglaterra", "Irán", "Estados Unidos", "Gales", "Argentina", "Arabia Saudita", "México", "Polonia", "Francia", "Australia", "Dinamarca", "Túnez", "España", "Costa Rica", "Alemania", "Japón", "Bélgica", "Canadá", "Marruecos", "Croacia", "Brasil", "Serbia", "Suiza", "Camerún", "Portugal", "Ghana", "Uruguay", "Corea del Sur"]
+    
+    init(country: String, players: [String], coach: String) {
+        self.country = country
+        self.players = players
+        self.coach = coach
+    }
+}
+
+let spain = worldCup(country: "Spain", players: ["Unai Simón", "Robert Sánchez", "David Raya", "Carvajal", "Azpilicueta", "Eric García", "Hugo Guillamón", "Pau Torres", "Aymeric Laporte", "Balde", "Jordi Alba", "Busquets", "Rodri", "Gavi", "Carlos Soler", "Marcos Llorente", "Pedri", "Koke", "Ferran Torres", "Nico Williams", "Yeremy Pino", "Álvaro Morata", "Marco Asensio", "Pablo Sarabia", "Dani Olmo", "Ansu Fati"], coach: "Luis Enrique")
+print("El país \(spain.country) dirigido por \(spain.coach) cuenta con \(spain.players)")
+
+/* 7.- Crear una clase para representar los partidos entre selecciones, deberá contener atributos como equipo local, visitante y resultado como mínimo. Generar una lista aleatoria de partidos entre la lista de selecciones anteriores y hacer un print de este estilo por partido: Partido: España 3 - 1 Brasil */
+print("")
+print("Exercise 7")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 7 */
+
+class nationalTeamMatches {
+    
+    let teams = ["Qatar", "Ecuador", "Senegal", "Países Bajos", "Inglaterra", "Irán", "Estados Unidos", "Gales", "Argentina", "Arabia Saudita", "México", "Polonia", "Francia", "Australia", "Dinamarca", "Túnez", "España", "Costa Rica", "Alemania", "Japón", "Bélgica", "Canadá", "Marruecos", "Croacia", "Brasil", "Serbia", "Suiza", "Camerún", "Portugal", "Ghana", "Uruguay", "Corea del Sur"]
+    
+    var matches: [String] = []
+    var selectedTeams: [String] = []
+    var randomNumber = 0
+    
+    func chooseTeams() {
+        teams.map { country in
+            if !selectedTeams.contains(country) {
+                randomNumber = Int.random(in: 0..<teams.count)
+                if !selectedTeams.contains(teams[randomNumber]) && country != teams[randomNumber] {
+                    matches.append("Partido: \(country) \(Int.random(in: 0...7)) - \(Int.random(in: 0...7)) \(teams[randomNumber])")
+                    selectedTeams.append(country)
+                    selectedTeams.append(teams[randomNumber])
+                }
+            }
+        }
+        
+        if teams.count != selectedTeams.count {
+            chooseTeams()
+        }
+    }
+}
+
+var raffle = nationalTeamMatches()
+
+raffle.chooseTeams()
+
+print(raffle.matches)
+
+/* 8.- Generar de forma aleatoria, dentro de la clase Mundial, un listado de grupos con un máximo de 4 selecciones por grupo, se puede crear una clase nueva Grupo que contenga el nombre del grupo, listado de participantes y listado de partidos. Por ejemplo: Grupo A España, Brasil, Francia, Alemania. */
+print("")
+print("Exercise 8")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 8 */
+
+var teams = ["Qatar", "Ecuador", "Senegal", "Países Bajos", "Inglaterra", "Irán", "Estados Unidos", "Gales", "Argentina", "Arabia Saudita", "México", "Polonia", "Francia", "Australia", "Dinamarca", "Túnez", "España", "Costa Rica", "Alemania", "Japón", "Bélgica", "Canadá", "Marruecos", "Croacia", "Brasil", "Serbia", "Suiza", "Camerún", "Portugal", "Ghana", "Uruguay", "Corea del Sur"]
+
+var group = [String]()
+var groups = [[String]]()
+var randomNumber = 0
+
+for _ in 0..<teams.count {
+    randomNumber = Int.random(in: 0..<teams.count)
+    if group.count == 4 {
+        groups.append(group)
+        group = []
+    } else {
+        group.append(teams[randomNumber])
+        teams = teams.filter({ team in
+            team != teams[randomNumber]
+        })
+    }
+}
+
+var counter = 0
+var groupWithName = [(String, [String])]()
+groups.map { group in
+    var groupName = ""
+    switch counter {
+    case 0:
+        groupName = "A"
+    case 1:
+        groupName = "B"
+    case 2:
+        groupName = "C"
+    case 3:
+        groupName = "D"
+    case 4:
+        groupName = "E"
+    default:
+        groupName = "F"
+    }
+    groupWithName.append(("Grupo \(groupName)", group))
+    counter += 1
+}
+
+print(groupWithName)
+
+/* 9.- Para añadir a cada Grupo los puntos de cada selección habrá que contabilizar las victorias con 3 puntos, empates con 1 y derrotas con 0. Añadir una función en la clase Grupo que le pasemos una selección y nos devuelva sus puntos. */
+print("")
+print("Exercise 9")
+print("=====================================================================================================")
+print("")
+
+/* Exercise 9 */
